@@ -35,6 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/**/excluir").hasAuthority(Perfil.ADMIN.toString())
             .anyRequest().authenticated();
 
+        http.csrf().ignoringAntMatchers("/api/v1/**");
+
         http.formLogin()
             .loginPage("/login")
             .defaultSuccessUrl("/clientes")
