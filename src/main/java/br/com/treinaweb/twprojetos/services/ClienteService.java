@@ -3,8 +3,9 @@ package br.com.treinaweb.twprojetos.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import br.com.treinaweb.twprojetos.entities.Cliente;
 import br.com.treinaweb.twprojetos.exceptions.ClienteNaoEncontradoException;
 import br.com.treinaweb.twprojetos.exceptions.ClientePossuiProjetosException;
@@ -22,6 +23,10 @@ public class ClienteService {
 
     public List<Cliente> findAll() {
         return clienteRepository.findAll();
+    }
+
+    public Page<Cliente> findAll(Pageable pageable) {
+        return clienteRepository.findAll(pageable);
     }
 
     public Cliente findById(Long id) {
