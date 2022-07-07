@@ -3,6 +3,8 @@ package br.com.treinaweb.twprojetos.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import br.com.treinaweb.twprojetos.api.dtos.CargoDTO;
@@ -27,6 +29,10 @@ public class CargoService {
 
     public List<Cargo> findAll() {
         return cargoRepository.findAll();
+    }
+
+    public Page<Cargo> findAll(Pageable pageable) {
+        return cargoRepository.findAll(pageable);
     }
 
     public Cargo findById(Long id) {

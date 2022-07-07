@@ -3,6 +3,9 @@ package br.com.treinaweb.twprojetos.api.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
@@ -31,9 +34,13 @@ public class CargoApiController {
     @Autowired
     private CargoAssembler cargoAssembler;
 
+    @Autowired
+    private PagedResourcesAssembler<Cargo> pagedResourcesAssembler;
+
     @GetMapping
-    public CollectionModel<EntityModel<Cargo>> findAll() {
-        return cargoAssembler.toCollectionModel(cargoService.findAll());
+    public CollectionModel<EntityModel<Cargo>> findAll(Pageable pageable) {
+        Page<Cargo> cargos = cargoService.findAll(pageable);
+        return pagedResourcesAssembler.toModel(cargos, cargoAssembler);
     }
 
     @GetMapping("/{id}")

@@ -39,7 +39,7 @@ public class CargoAssembler implements SimpleRepresentationModelAssembler<Cargo>
 
     @Override
     public void addLinks(CollectionModel<EntityModel<Cargo>> resources) {
-        Link selfLink = linkTo(methodOn(CargoApiController.class).findAll())
+        Link selfLink = linkTo(methodOn(CargoApiController.class).findAll(null))
             .withSelfRel()
             .withType("GET")
             .withTitle("Busca todos os cargos cadastrados.");

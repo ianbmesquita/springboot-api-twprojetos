@@ -18,7 +18,7 @@ public class RaizApiController {
     public RaizModel obterLinksRaiz() {
         RaizModel raizModel = new RaizModel();
 
-        Link cargosLink = linkTo(methodOn(CargoApiController.class).findAll())
+        Link cargosLink = linkTo(methodOn(CargoApiController.class).findAll(null))
             .withRel("cargos")
             .withType("GET");
         
