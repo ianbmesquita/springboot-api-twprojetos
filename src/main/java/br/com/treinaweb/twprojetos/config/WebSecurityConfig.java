@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import br.com.treinaweb.twprojetos.enums.Perfil;
-import br.com.treinaweb.twprojetos.servicos.UserDetailsServiceImpl;
+import br.com.treinaweb.twprojetos.services.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -29,10 +29,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/img/**").permitAll()
             .antMatchers("/js/**").permitAll()
             .antMatchers("/plugins/**").permitAll()
+            .antMatchers("/api/v1/**").permitAll()
             .antMatchers("/**/cadastrar").hasAuthority(Perfil.ADMIN.toString())
             .antMatchers("/**/editar").hasAuthority(Perfil.ADMIN.toString())
             .antMatchers("/**/excluir").hasAuthority(Perfil.ADMIN.toString())
             .anyRequest().authenticated();
+
+        http.csrf().ignoringAntMatchers("/api/v1/**");
 
         http.formLogin()
             .loginPage("/login")
