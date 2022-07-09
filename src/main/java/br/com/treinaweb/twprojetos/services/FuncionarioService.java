@@ -3,6 +3,8 @@ package br.com.treinaweb.twprojetos.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,10 @@ public class FuncionarioService {
 
     public List<Funcionario> findAll() {
         return funcionarioRepository.findAll();
+    }
+
+    public Page<Funcionario> findAll(Pageable pageable) {
+        return funcionarioRepository.findAll(pageable);
     }
 
     public List<Funcionario> findLideres() {
